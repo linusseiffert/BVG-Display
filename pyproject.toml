@@ -9,7 +9,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.14"
+python = "^3.12"
 requests = "^2.33.1"
 python-dotenv = "^1.2.2"
 black = "^26.3.1"
