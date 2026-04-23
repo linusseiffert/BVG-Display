@@ -1,0 +1,22 @@
+[Unit]
+Description=BVG Transit Display
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/bvg-display
+EnvironmentFile=/home/pi/bvg-display/.env
+ExecStart=/home/pi/.local/bin/poetry run bvg-display
+Restart=always
+RestartSec=10
+
+# Hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/pi/bvg-display
+
+[Install]
+WantedBy=multi-user.target
