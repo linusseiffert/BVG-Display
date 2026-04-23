@@ -80,18 +80,14 @@ class TransitClient:
         except httpx.HTTPStatusError as exc:
             status = exc.response.status_code
             if status == 429:
-                logger.warning(
-                    "Rate-limited by API (429). Back off and retry later."
-                )
+                logger.warning("Rate-limited by API (429). Back off and retry later.")
             else:
                 body = exc.response.text[:200]
                 logger.error("API returned %d: %s", status, body)
             return StopInfo(stop_id=stop_id)
 
         except httpx.ConnectError:
-            logger.error(
-                "Cannot reach API at %s", self._http.base_url
-            )
+            logger.error("Cannot reach API at %s", self._http.base_url)
             return StopInfo(stop_id=stop_id)
 
         except httpx.TimeoutException:
@@ -104,4 +100,3 @@ class TransitClient:
     async def close(self) -> None:
         """Close the underlying HTTP client."""
         await self._http.aclose()
-

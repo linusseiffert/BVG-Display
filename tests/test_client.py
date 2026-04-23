@@ -71,9 +71,9 @@ class TestGetDeparturesOk:
     @respx.mock
     @pytest.mark.asyncio
     async def test_passes_duration_and_results_params(self) -> None:
-        route = respx.get("https://v6.bvg.transport.rest/stops/900017101/departures").mock(
-            return_value=httpx.Response(200, json={"departures": []})
-        )
+        route = respx.get(
+            "https://v6.bvg.transport.rest/stops/900017101/departures"
+        ).mock(return_value=httpx.Response(200, json={"departures": []}))
 
         settings = _settings()
         async with TransitClient(settings) as client:

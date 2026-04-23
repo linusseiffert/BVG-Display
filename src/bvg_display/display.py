@@ -98,4 +98,3 @@ def _format_delay(delay_seconds: int) -> str:
     if minutes == 0:
         return f"  +{delay_seconds}s"
     return f"  +{minutes}min"
-

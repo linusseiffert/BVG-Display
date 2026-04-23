@@ -42,7 +42,12 @@ class TestDeparture:
     def test_negative_delay_when_early(self) -> None:
         scheduled = datetime(2026, 1, 1, 8, 0, tzinfo=TZ_BERLIN)
         expected = scheduled - timedelta(seconds=30)
-        dep = Departure(line="M10", destination="Warschauer Str.", scheduled=scheduled, expected=expected)
+        dep = Departure(
+            line="M10",
+            destination="Warschauer Str.",
+            scheduled=scheduled,
+            expected=expected,
+        )
         assert dep.delay_seconds == -30
 
 
@@ -137,4 +142,3 @@ class TestStopInfoFromApi:
         assert len(info.departures) == 2
         assert info.departures[0].line == "U6"
         assert info.departures[1].line == "M19"
-

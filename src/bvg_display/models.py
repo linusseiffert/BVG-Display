@@ -113,4 +113,3 @@ class StopInfo:
             name = first_stop.get("name", "")
 
         return cls(stop_id=stop_id, name=name, departures=departures)
-

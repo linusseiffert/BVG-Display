@@ -30,11 +30,17 @@ def _build_renderer(settings: Settings) -> DisplayRenderer:
                 clear_screen=True,
             )
         case "eink":
-            raise NotImplementedError(f"Display backend '{backend}' is not implemented yet")
+            raise NotImplementedError(
+                f"Display backend '{backend}' is not implemented yet"
+            )
         case "lcd":
-            raise NotImplementedError(f"Display backend '{backend}' is not implemented yet")
+            raise NotImplementedError(
+                f"Display backend '{backend}' is not implemented yet"
+            )
         case "web":
-            raise NotImplementedError(f"Display backend '{backend}' is not implemented yet")
+            raise NotImplementedError(
+                f"Display backend '{backend}' is not implemented yet"
+            )
         case _:
             raise ValueError(f"Unknown display backend: {backend!r}")
 
@@ -53,7 +59,7 @@ def _backoff_seconds(
     """
     if consecutive_failures <= 0:
         return base_interval
-    delay = base_interval * (2 ** consecutive_failures)
+    delay = base_interval * (2**consecutive_failures)
     return min(delay, MAX_BACKOFF_SECONDS)
 
 

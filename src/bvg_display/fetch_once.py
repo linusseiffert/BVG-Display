@@ -11,7 +11,9 @@ import logging
 from bvg_display.config import Settings
 from bvg_display.client import TransitClient
 
-logging.basicConfig(level=logging.DEBUG, format="%(asctime)s  %(levelname)-8s  %(message)s")
+logging.basicConfig(
+    level=logging.DEBUG, format="%(asctime)s  %(levelname)-8s  %(message)s"
+)
 
 
 async def main() -> None:

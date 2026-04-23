@@ -63,7 +63,9 @@ class Settings:
     api_base_url: str = field(default_factory=lambda: _env("API_BASE_URL"))
     api_key: str = field(default_factory=lambda: _env("API_KEY"))
     stop_id: str = field(default_factory=lambda: _env("STOP_ID"))
-    poll_interval_seconds: int = field(default_factory=lambda: _env_int("POLL_INTERVAL", 30))
+    poll_interval_seconds: int = field(
+        default_factory=lambda: _env_int("POLL_INTERVAL", 30)
+    )
 
     # --- Display ---
     display_backend: DisplayBackend = field(default_factory=lambda: _env("DISPLAY_BACKEND", "terminal"))  # type: ignore[assignment]
@@ -86,7 +88,12 @@ class Settings:
                 f"Copy .env.example to .env and fill them in."
             )
 
-        allowed_backends: tuple[DisplayBackend, ...] = ("terminal", "eink", "lcd", "web")
+        allowed_backends: tuple[DisplayBackend, ...] = (
+            "terminal",
+            "eink",
+            "lcd",
+            "web",
+        )
         if self.display_backend not in allowed_backends:
             raise ValueError(
                 f"DISPLAY_BACKEND must be one of {allowed_backends}, "

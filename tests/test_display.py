@@ -20,7 +20,9 @@ def _make_departure(
     """Build a Departure relative to 'now' for easy testing."""
     now = datetime.now(tz=TZ_BERLIN)
     scheduled = now + timedelta(minutes=minutes_from_now)
-    expected = scheduled + timedelta(seconds=delay_seconds) if delay_seconds else scheduled
+    expected = (
+        scheduled + timedelta(seconds=delay_seconds) if delay_seconds else scheduled
+    )
     return Departure(
         line=line,
         destination=destination,
@@ -129,7 +131,9 @@ class TestTerminalRendererStale:
 
 class TestTerminalRendererMaxRows:
     def test_limits_output_rows(self, capsys) -> None:
-        deps = [_make_departure(line=f"L{i}", minutes_from_now=i + 1) for i in range(15)]
+        deps = [
+            _make_departure(line=f"L{i}", minutes_from_now=i + 1) for i in range(15)
+        ]
         renderer = TerminalRenderer(max_rows=5, clear_screen=False)
         renderer.render(_make_stop_info(departures=deps))
 
@@ -147,7 +151,10 @@ class TestHelpers:
         assert _truncate("Hello", 10) == "Hello"
 
     def test_truncate_long_string(self) -> None:
-        assert _truncate("S+U Alexanderplatz Bhf (Berlin)", 24) == "S+U Alexanderplatz Bhf …"
+        assert (
+            _truncate("S+U Alexanderplatz Bhf (Berlin)", 24)
+            == "S+U Alexanderplatz Bhf …"
+        )
 
     def test_truncate_exact_length(self) -> None:
         assert _truncate("Exactly24CharsLongText!!", 24) == "Exactly24CharsLongText!!"

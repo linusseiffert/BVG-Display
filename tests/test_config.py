@@ -21,32 +21,44 @@ def _env(**overrides: str) -> dict[str, str]:
 class TestSettingsValidation:
     def test_missing_stop_id_raises(self) -> None:
         env = _env(STOP_ID="")
-        with patch.dict(os.environ, env, clear=True), pytest.raises(ValueError, match="STOP_ID"):
+        with patch.dict(os.environ, env, clear=True), pytest.raises(
+            ValueError, match="STOP_ID"
+        ):
             Settings()
 
     def test_missing_api_base_url_raises(self) -> None:
         env = _env(API_BASE_URL="")
-        with patch.dict(os.environ, env, clear=True), pytest.raises(ValueError, match="API_BASE_URL"):
+        with patch.dict(os.environ, env, clear=True), pytest.raises(
+            ValueError, match="API_BASE_URL"
+        ):
             Settings()
 
     def test_invalid_backend_raises(self) -> None:
         env = _env(DISPLAY_BACKEND="hologram")
-        with patch.dict(os.environ, env, clear=True), pytest.raises(ValueError, match="hologram"):
+        with patch.dict(os.environ, env, clear=True), pytest.raises(
+            ValueError, match="hologram"
+        ):
             Settings()
 
     def test_poll_interval_too_low_raises(self) -> None:
         env = _env(POLL_INTERVAL="2")
-        with patch.dict(os.environ, env, clear=True), pytest.raises(ValueError, match="≥ 5"):
+        with patch.dict(os.environ, env, clear=True), pytest.raises(
+            ValueError, match="≥ 5"
+        ):
             Settings()
 
     def test_poll_interval_not_a_number_raises(self) -> None:
         env = _env(POLL_INTERVAL="fast")
-        with patch.dict(os.environ, env, clear=True), pytest.raises(ValueError, match="integer"):
+        with patch.dict(os.environ, env, clear=True), pytest.raises(
+            ValueError, match="integer"
+        ):
             Settings()
 
     def test_invalid_log_level_raises(self) -> None:
         env = _env(LOG_LEVEL="VERBOSE")
-        with patch.dict(os.environ, env, clear=True), pytest.raises(ValueError, match="VERBOSE"):
+        with patch.dict(os.environ, env, clear=True), pytest.raises(
+            ValueError, match="VERBOSE"
+        ):
             Settings()
 
 
